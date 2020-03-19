@@ -59,18 +59,21 @@ public class BungeePlayerListener implements Listener, SettingsDependent {
         chatRequiresAuth = settings.getProperty(BungeeConfigProperties.CHAT_REQUIRES_AUTH);
     }
 
+    @SuppressWarnings("unused")
     @EventHandler
     public void onPlayerJoin(final PostLoginEvent event) {
         // Register player in our list
         authPlayerManager.addAuthPlayer(event.getPlayer());
     }
 
+    @SuppressWarnings("unused")
     @EventHandler
     public void onPlayerDisconnect(final PlayerDisconnectEvent event) {
         // Remove player from out list
         authPlayerManager.removeAuthPlayer(event.getPlayer());
     }
 
+    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onCommand(final ChatEvent event) {
 
@@ -99,10 +102,11 @@ public class BungeePlayerListener implements Listener, SettingsDependent {
         if (commandWhitelist.contains(event.getMessage().split(" ")[0].toLowerCase())) {
             return;
         }
-        
+
         event.setCancelled(true);
     }
 
+    @SuppressWarnings("unused")
     // Priority is set to lowest to keep compatibility with some chat plugins
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(final ChatEvent event) {
@@ -136,6 +140,7 @@ public class BungeePlayerListener implements Listener, SettingsDependent {
         return allServersAreAuthServers || authServers.contains(serverInfo.getName().toLowerCase());
     }
 
+    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerConnectedToServer(final ServerConnectedEvent event) {
         final ProxiedPlayer player = event.getPlayer();
@@ -154,6 +159,7 @@ public class BungeePlayerListener implements Listener, SettingsDependent {
         }
     }
 
+    @SuppressWarnings("unused")
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerConnectingToServer(final ServerConnectEvent event) {
         if (event.isCancelled()) {
