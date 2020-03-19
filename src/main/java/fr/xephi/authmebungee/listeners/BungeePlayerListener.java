@@ -71,8 +71,9 @@ public class BungeePlayerListener implements Listener, SettingsDependent {
         authPlayerManager.removeAuthPlayer(event.getPlayer());
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onCommand(final ChatEvent event) {
+
         if (event.isCancelled() || !event.isCommand() || !isCommandsRequireAuth) {
             return;
         }
@@ -88,14 +89,17 @@ public class BungeePlayerListener implements Listener, SettingsDependent {
         if (authPlayer != null && authPlayer.isLogged()) {
             return;
         }
+
         // Only in auth servers
         if (!isAuthServer(player.getServer().getInfo())) {
             return;
         }
+
         // Check if command is whitelisted command
         if (commandWhitelist.contains(event.getMessage().split(" ")[0].toLowerCase())) {
             return;
         }
+        
         event.setCancelled(true);
     }
 
